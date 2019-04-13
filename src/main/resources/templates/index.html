@@ -1,0 +1,130 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <title>NASI-Pay</title>
+    <style>
+        body {
+            margin-top: 70px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+            aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Features</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+            </li>
+        </ul>
+        <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <div class="card border-dark">
+                <div class="card-header bg-transparent">
+                    开始你的选择吧:
+                </div>
+                <div class="card-body">
+                    <form method="post" action="/payments/add">
+                        <div class="form-group">
+                            <label for="nickName">昵称: </label>
+                            <input required type="text" class="form-control" name="nickName" id="nickName"
+                                   placeholder="昵称">
+                        </div>
+                        <div class="form-group">
+                            <label for="productId">选择产品: </label>
+                            <select class="form-control" name="productId" id="productId"
+                                    required>
+
+                                <option th:each="prod: ${products}" th:value="${prod.id}"
+                                        th:attr="data-price=${prod.price}"
+                                        th:text="${prod.price}+'💰 - '+${prod.name}"></option>
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="info">备注: </label>
+                            <input type="text" name="info" class="form-control" id="info"
+                                   placeholder="备注信息">
+                        </div>
+
+                        <div class="btn-group form-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-info active">
+                                <input type="radio" name="payType" id="option1" autocomplete="off" value="alipay"
+                                       checked> 支付宝
+                            </label>
+                            <label class="btn btn-info">
+                                <input type="radio" name="payType" id="option2" autocomplete="off" value="paypal">
+                                PayPal
+                            </label>
+                        </div>
+
+                        <hr>
+                        <div class="row">
+                            <div class="col-auto mr-auto">
+                                <span>支付价格: </span>
+                                <b id="total" class="text-danger"></b>
+                                <span> 元</span>
+                            </div>
+                            <div class="col-auto">
+                                <input class="btn btn-primary" type="submit" value="支付"/>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"></script>
+<script>
+    $('#productId').on('change', function (e) {
+        changeVal();
+    });
+
+    changeVal();
+
+    function changeVal() {
+        var id = $('#productId').val();
+        var price = $('option[value=' + id + ']').attr('data-price');
+        $('#total').html(price);
+    }
+</script>
+</body>
+</html>
