@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Entity(name = "payment")
 @Data
-public class Payment {
+public class MyPayment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,6 +33,8 @@ public class Payment {
 
     private String qrCode;
 
-    private String productName;
+    private Integer productId;
+
+    private String email;
 
 }

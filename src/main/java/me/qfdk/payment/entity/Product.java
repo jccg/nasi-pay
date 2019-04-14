@@ -20,6 +20,8 @@ public class Product {
 
     private String description;
 
-    private BigDecimal price;
+    private BigDecimal priceAliPay;
+
+    private BigDecimal pricePaypal;
 
 }

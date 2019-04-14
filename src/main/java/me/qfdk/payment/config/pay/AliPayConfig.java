@@ -5,10 +5,11 @@ import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.request.AlipayTradePrecreateRequest;
 import com.alipay.api.response.AlipayTradePrecreateResponse;
+import me.qfdk.payment.entity.Product;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Repository;
+import org.springframework.context.annotation.Configuration;
 
-@Repository
+@Configuration
 public class AliPayConfig {
 
     @Value("${appid}")
@@ -36,21 +37,18 @@ public class AliPayConfig {
 
     }
 
-    public AlipayTradePrecreateResponse getReponse(String money, String productName) throws AlipayApiException {
+    public AlipayTradePrecreateResponse getReponse(String outTradeNo, Product product) throws AlipayApiException {
         AlipayClient alipayClient = new DefaultAlipayClient(SERVERURL, APPID, RSA2_PRIVATE, "json",
                 "UTF-8", ALIPAY_PUBLIC_KEY, "RSA2"); //获得初始化的AlipayClient
         AlipayTradePrecreateRequest request = new AlipayTradePrecreateRequest();//创建API对应的request类
-
-        String outTradeNo = "nasi-pay-" + System.currentTimeMillis()
-                + (long) (Math.random() * 10000000L);
 
         String body = "";
 
         request.setBizContent("{" +
                 "    \"out_trade_no\":\"" + outTradeNo + "\"," +
-                "    \"total_amount\":\"" + money + "\"," +
+                "    \"total_amount\":\"" + product.getPriceAliPay() + "\"," +
                 "    \"body\":\"" + body + "\"," +
-                "    \"subject\":\"" + productName + "\"," +
+                "    \"subject\":\"" + product.getName() + "\"," +
                 "    \"timeout_express\":\"90m\"}");//设置业务参数
         request.setNotifyUrl(NOTIFY_URL);
         AlipayTradePrecreateResponse response = alipayClient.execute(request);//通过alipayClient调用API，获得对应的response类

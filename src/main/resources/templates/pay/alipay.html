@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-    <title>NASI-Pay 支付宝付款</title>
+    <title>NASI-PAY</title>
     <style>
         body {
             margin-top: 70px;
@@ -16,35 +16,7 @@
     </style>
 </head>
 <body>
-
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
-            aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarColor01">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-            </li>
-        </ul>
-        <form class="form-inline">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </div>
-</nav>
+<th:block th:include="include/nav"></th:block>
 
 <div class="container">
     <div class="row justify-content-center">
@@ -53,14 +25,15 @@
                 <div class="card-header bg-transparent">
                     <h5>
                         <span class="badge badge-primary">订单编号: </span>
-                        <span th:text="${out_trade_no}"></span>
+                        <span th:text="${payment.numeroTransaction}"></span>
                     </h5>
                 </div>
                 <div class="card-body">
                     <div class="row justify-content-center">
-                        <p class="text-center">扫一扫付款（元）: </p>
+                        <p class="text-center">扫一扫付款 <b class="text-danger" th:text="${product.priceAliPay}"></b>（元）
+                        </p>
                         <div class="w-100"></div>
-                        <img id="url" style="height: 200px; width: 200px;" th:src="'/api/qrCode?str='+${qrCode}"
+                        <img id="url" style="height: 200px; width: 200px;" th:src="'/api/qrCode?str='+${payment.qrCode}"
                              class="mg-responsive center-block"
                              alt="...">
                         <div class="w-100"></div>
@@ -71,14 +44,14 @@
                         </div>
                         <div class="w-100"></div>
                         <a id="pay" class="btn btn-primary"
-                           th:attr="href='alipays://platformapi/startapp?appId=20000067&url='+${qrCode}"
+                           th:attr="href='alipays://platformapi/startapp?appId=20000067&url='+${payment.qrCode}"
                            style="width: 205px;margin-top: 20px;">一键启动支付宝APP支付</a>
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col-auto mr-auto">
                             <span>支付价格: </span>
-                            <b id="total" class="text-danger" th:text="${product.price}"></b>
+                            <b id="total" class="text-danger" th:text="${product.priceAliPay}"></b>
                             <span> 元</span>
                         </div>
                         <div class="col-auto">
@@ -93,8 +66,8 @@
     </div>
 
 
-    <input type="hidden" id="out_trade_no" th:value="${out_trade_no}">
-    <input type="hidden" id="nickName" th:value="${nickName}">
+    <input type="hidden" id="out_trade_no" th:value="${payment.numeroTransaction}">
+    <input type="hidden" id="nickName" th:value="${payment.nickName}">
 
 </div>
 
@@ -134,7 +107,7 @@
                     $('#pay').html('支付成功,三秒钟后自动跳转...')
 
                     setTimeout(function () {
-                        window.location = '/user/findUserByWechatName?wechatName=' + data.nikeName;
+                        window.location = '/payments/query?id=' + $('#out_trade_no').val();
                     }, 3000);
                 }
             } catch (e) {
