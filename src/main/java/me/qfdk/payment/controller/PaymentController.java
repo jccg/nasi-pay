@@ -7,6 +7,7 @@ import com.paypal.api.payments.Payment;
 import com.paypal.api.payments.PaymentExecution;
 import com.paypal.base.rest.PayPalRESTException;
 import me.qfdk.payment.common.Constant;
+import me.qfdk.payment.common.EmailUtils;
 import me.qfdk.payment.common.Tools;
 import me.qfdk.payment.config.pay.AliPayConfig;
 import me.qfdk.payment.config.pay.PayPalConfig;
@@ -42,6 +43,9 @@ public class PaymentController {
     private PaymentRepository paymentRepository;
 
     @Autowired
+    private EmailUtils emailUtils;
+
+    @Autowired
     AliPayConfig aliPayConfig;
 
     @Autowired
@@ -67,11 +71,11 @@ public class PaymentController {
         List<MyPayment> tmp = paymentRepository.findMyPaymentByNickNameAndProductIdAndStatusAndPayType(nickName, product.getId(), Constant.PAYMENT_STATUS_WAITING, payType);
 
         model.addAttribute("url", DOMAIN);
-
         model.addAttribute("product", product);
 
         if (tmp.isEmpty()) {
             MyPayment myPayment = new MyPayment();
+            // 支付宝逻辑
             if (payType.equals(Constant.PAYTYPE_ALIPAY)) {
                 System.out.println("支付宝");
                 myPayment.setMoney(product.getPriceAliPay());
@@ -81,6 +85,7 @@ public class PaymentController {
                     page = "pay/alipay";
                 }
             }
+            // PayPal 逻辑
             if (payType.equals(Constant.PAYTYPE_PAYPAL)) {
                 System.out.println("paypal");
                 myPayment.setMoney(product.getPricePaypal());
@@ -124,7 +129,6 @@ public class PaymentController {
             }
 
             model.addAttribute("payment", tmp.get(tmp.size() - 1));
-            System.out.println(tmp);
         }
 
         return page;
@@ -207,8 +211,14 @@ public class PaymentController {
         return "pay/query";
     }
 
+    /**
+     * 支付成功逻辑
+     *
+     * @param myPayment
+     * @param product
+     */
     public void doSuccess(MyPayment myPayment, Product product) {
-        System.out.println("支付成功逻辑:" + myPayment.getEmail());
+        emailUtils.sendTemplateMail("i@tar.tn", myPayment.getEmail(), "【NASI-PAY】您订购的 ->" + product.getName() + "<- 到账了！", "mail", myPayment, product);
     }
 
 }

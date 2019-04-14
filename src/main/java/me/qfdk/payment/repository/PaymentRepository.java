@@ -11,10 +11,9 @@ public interface PaymentRepository extends JpaRepository<MyPayment, Integer> {
 
     MyPayment findMyPaymentByNumeroTransactionAndStatus(String numero, String status);
 
-    MyPayment findMyPaymentByNumeroTransactionAndStatusAndPayType(String numero, String status, String payType);
-
     MyPayment findMyPaymentByNumeroTransaction(String numero);
 
     List<MyPayment> findMyPaymentByNickNameAndProductIdAndStatusAndPayType(String nickName, Integer productId, String status, String payType);
 
+    List<MyPayment> findByProductId(Integer id);
 }

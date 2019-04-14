@@ -1,0 +1,354 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" name="viewport"/>
+    <title>NASI-PAY</title>
+    <style type="text/css">
+        .ReadMsgBody {
+            width: 100%;
+            background-color: #ffffff;
+        }
+
+        .ExternalClass {
+            width: 100%;
+            background-color: #ffffff;
+        }
+
+        .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {
+            line-height: 100%;
+        }
+
+        html {
+            width: 100%;
+        }
+
+        body {
+            -webkit-text-size-adjust: none;
+            -ms-text-size-adjust: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+            table-layout: fixed;
+            margin: 0 auto;
+        }
+
+        table table table {
+            table-layout: auto;
+        }
+
+        img {
+            display: block !important;
+        }
+
+        table td {
+            border-collapse: collapse;
+        }
+
+        .yshortcuts a {
+            border-bottom: none !important;
+        }
+
+        a {
+            color: #ff646a;
+            text-decoration: none;
+        }
+
+        .textbutton a {
+            font-family: 'open sans', arial, sans-serif !important;
+            color: #ffffff !important;
+        }
+
+        .footer-link a {
+            color: #7f8c8d !important;
+        }
+    </style>
+</head>
+
+<body>
+<table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="100%">
+
+    <!-- header -->
+
+    <tr>
+        <td align="center">
+            <table align="center" bgcolor="#f8f8f8" border="0" cellpadding="0" cellspacing="0" width="100%">
+                <tr align="center" valign="top">
+                    <td>
+                        <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+                            <tr>
+                                <td align="center" valign="top" width="392">
+                                    <table align="center" border="0" cellpadding="0" cellspacing="0" width="342">
+                                        <tr>
+                                            <td height="50"></td>
+                                        </tr>
+
+                                        <!-- title -->
+                                        <tr>
+                                            <td align="right"
+                                                style="font-family: 'Open Sans', Arial, sans-serif; font-size:38px; color:#3b3b3b; line-height:26px;">
+                                                发货账单
+                                            </td>
+                                        </tr>
+                                        <!-- end title -->
+
+                                        <tr>
+                                            <td height="25"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td height="25"></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <!-- end header -->
+
+    <!-- title -->
+
+    <tr>
+        <td align="center">
+            <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+                <tr>
+                    <td align="center" style="border-bottom:3px solid #bcbcbc;">
+                        <table align="center" border="0" cellpadding="0" cellspacing="0" width="550">
+                            <tr>
+                                <td height="20"></td>
+                            </tr>
+
+                            <!-- header -->
+                            <tr>
+                                <td>
+                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                        <tr>
+                                            <td align="left"
+                                                style="font-size:13px; color:#3b3b3b; line-height:26px; text-transform:uppercase;"
+                                                valign="top"
+                                                width="100%">
+                                                您订购的：<b th:text="${name}"></b> 到货了 !
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <!-- end header -->
+                            <tr>
+                                <td height="10"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <!-- end title -->
+
+    <!-- list -->
+    <tr>
+        <td align="center">
+            <table border="0" cellpadding="0" cellspacing="0" width="600">
+                <tr>
+                    <td align="center" style="border-bottom:1px solid #ecf0f1;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="550">
+                            <tr>
+                                <td height="15"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                        <tr>
+                                            <td align="left"
+                                                style="font-family: 'Open Sans', Arial, sans-serif; font-size:14px; color:#3b3b3b; line-height:26px;  font-weight: bold;"
+                                                valign="top"
+                                                width="250">
+                                                用户昵称
+                                            </td>
+                                            <td align="left"
+                                                style="font-family: 'Open Sans', Arial, sans-serif; font-size:14px; color:#3b3b3b; line-height:26px;  font-weight: bold;"
+                                                valign="top"
+                                                width="300">
+                                                <span th:text="${nickName}"></span></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="5"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="5"></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <!-- end list -->
+
+    <!-- list -->
+    <tr>
+        <td align="center">
+            <table border="0" cellpadding="0" cellspacing="0" width="600">
+                <tr>
+                    <td align="center" style="border-bottom:1px solid #ecf0f1;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="550">
+                            <tr>
+                                <td height="15"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                        <tr>
+                                            <td align="left"
+                                                style="font-family: 'Open Sans', Arial, sans-serif; font-size:14px; color:#3b3b3b; line-height:26px;  font-weight: bold;"
+                                                valign="top"
+                                                width="250">
+                                                支付方式
+                                            </td>
+                                            <td align="left"
+                                                style="font-family: 'Open Sans', Arial, sans-serif; font-size:14px; color:#3b3b3b; line-height:26px;  font-weight: bold;"
+                                                valign="top"
+                                                width="300">
+                                                <span th:if="${payType}=='alipay'" th:text="支付宝"></span>
+                                                <span th:if="${payType}=='paypal'" th:text="PayPal"></span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="5"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="5"></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <!-- end list -->
+
+    <!-- list -->
+    <tr>
+        <td align="center">
+            <table border="0" cellpadding="0" cellspacing="0" width="600">
+                <tr>
+                    <td align="center" style="border-bottom:1px solid #ecf0f1;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="550">
+                            <tr>
+                                <td height="15"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                        <tr>
+                                            <td align="left"
+                                                style="font-family: 'Open Sans', Arial, sans-serif; font-size:14px; color:#3b3b3b; line-height:26px;  font-weight: bold;"
+                                                valign="top"
+                                                width="250">
+                                                订单编号
+                                            </td>
+                                            <td align="left"
+                                                style="font-family: 'Open Sans', Arial, sans-serif; font-size:14px; color:#3b3b3b; line-height:26px;  font-weight: bold;"
+                                                valign="top"
+                                                width="300">
+                                                <span th:text="${numeroTransaction}"></span></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="5"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="5"></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <!-- end list -->
+
+
+    <!-- list -->
+    <tr>
+        <td align="center">
+            <table border="0" cellpadding="0" cellspacing="0" width="600">
+                <tr>
+                    <td align="center" style="border-bottom:1px solid #ecf0f1;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="550">
+                            <tr>
+                                <td height="15"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                        <tr>
+                                            <td align="left"
+                                                style="font-family: 'Open Sans', Arial, sans-serif; font-size:14px; color:#3b3b3b; line-height:26px;  font-weight: bold;"
+                                                valign="top"
+                                                width="250">
+                                                留言
+                                            </td>
+                                            <td align="left"
+                                                style="font-family: 'Open Sans', Arial, sans-serif; font-size:14px; color:#3b3b3b; line-height:26px;  font-weight: bold;"
+                                                valign="top"
+                                                width="300">
+                                                <span th:text="${info}"></span></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="5"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="5"></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <!-- end list -->
+
+    <tr>
+        <td align="center">
+            <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+                <tr>
+                    <td align="center" height="0">
+                        <p th:utext="${description}"></p>
+                        <hr>
+                        <p>有问题请去hostloc论坛 : @qfdk</p>
+                        <p>
+                            <a href="https://t.me/joinchat/EK0KhA0cPDc17beiJhWCKQ"> 加入 TG 群组</a>
+                            <a href="http://blog.qfdk.me">个人技术博客</a>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+</table>
+</body>
+</html>

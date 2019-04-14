@@ -48,7 +48,7 @@
                         </tr>
                         <tr>
                             <th scope="row">订单描述</th>
-                            <td th:text="${product.description}">描述</td>
+                            <td th:utext="${product.description}">描述</td>
                         </tr>
                         <tr>
                             <th scope="row">支付方式</th>
@@ -61,7 +61,7 @@
                         </tr>
                         <tr>
                             <th scope="row">创建时间</th>
-                            <td th:text="${payment.createDate}">描述</td>
+                            <td th:text="${payment.createDate}">时间</td>
                         </tr>
                         <tr>
                             <th scope="row">支付价格</th>
